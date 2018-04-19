@@ -3093,6 +3093,11 @@ part number 2062-2P from STA</description>
 <wire x1="-55.88" y1="124.46" x2="-43.18" y2="124.46" width="0.1524" layer="91"/>
 <label x="-48.26" y="124.46" size="1.778" layer="95"/>
 </segment>
+<segment>
+<pinref part="U2" gate="G$1" pin="CS"/>
+<wire x1="-243.84" y1="76.2" x2="-261.62" y2="76.2" width="0.1524" layer="91"/>
+<label x="-259.08" y="76.2" size="1.778" layer="95"/>
+</segment>
 </net>
 <net name="SDA" class="0">
 <segment>
@@ -3241,13 +3246,6 @@ part number 2062-2P from STA</description>
 <wire x1="-119.38" y1="142.24" x2="-119.38" y2="144.78" width="0.1524" layer="91"/>
 <pinref part="U1" gate="U$1" pin="PB7(XTAL2/TOSC2)"/>
 <wire x1="-104.14" y1="144.78" x2="-104.14" y2="142.24" width="0.1524" layer="91"/>
-</segment>
-</net>
-<net name="N$3" class="0">
-<segment>
-<pinref part="U2" gate="G$1" pin="CS"/>
-<wire x1="-243.84" y1="76.2" x2="-261.62" y2="76.2" width="0.1524" layer="91"/>
-<label x="-259.08" y="76.2" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="A0" class="0">
