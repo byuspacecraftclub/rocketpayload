@@ -3169,11 +3169,12 @@ part number 2062-2P from STA</description>
 <pinref part="R1" gate="G$1" pin="1"/>
 </segment>
 </net>
-<net name="N$8" class="0">
+<net name="IO5" class="0">
 <segment>
 <pinref part="U1" gate="U$1" pin="PD5(T1)"/>
 <pinref part="R1" gate="G$1" pin="2"/>
 <wire x1="-55.88" y1="139.7" x2="-30.48" y2="139.7" width="0.1524" layer="91"/>
+<label x="-53.34" y="139.7" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="RXD" class="0">
@@ -3230,22 +3231,24 @@ part number 2062-2P from STA</description>
 <pinref part="R5" gate="G$1" pin="1"/>
 </segment>
 </net>
-<net name="N$9" class="0">
+<net name="XTAL1" class="0">
 <segment>
 <pinref part="Y1" gate="G$1" pin="1"/>
 <wire x1="-104.14" y1="152.4" x2="-119.38" y2="152.4" width="0.1524" layer="91"/>
 <wire x1="-119.38" y1="152.4" x2="-119.38" y2="149.86" width="0.1524" layer="91"/>
 <pinref part="U1" gate="U$1" pin="PB6(XTAL1/TOSC1)"/>
 <wire x1="-104.14" y1="149.86" x2="-104.14" y2="152.4" width="0.1524" layer="91"/>
+<label x="-114.3" y="152.4" size="1.778" layer="95"/>
 </segment>
 </net>
-<net name="N$11" class="0">
+<net name="XTAL2" class="0">
 <segment>
 <pinref part="Y1" gate="G$1" pin="3"/>
 <wire x1="-104.14" y1="142.24" x2="-119.38" y2="142.24" width="0.1524" layer="91"/>
 <wire x1="-119.38" y1="142.24" x2="-119.38" y2="144.78" width="0.1524" layer="91"/>
 <pinref part="U1" gate="U$1" pin="PB7(XTAL2/TOSC2)"/>
 <wire x1="-104.14" y1="144.78" x2="-104.14" y2="142.24" width="0.1524" layer="91"/>
+<label x="-114.3" y="142.24" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="A0" class="0">
