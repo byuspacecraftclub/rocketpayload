@@ -882,88 +882,6 @@ by exp-lbrs-replace2.ulp</description>
 <vertex x="-0.875" y="1.5"/>
 </polygon>
 </package>
-<package name="1X02">
-<description>&lt;h3&gt;Plated Through Hole&lt;/h3&gt;
-&lt;p&gt;Specifications:
-&lt;ul&gt;&lt;li&gt;Pin count:2&lt;/li&gt;
-&lt;li&gt;Pin pitch:0.1"&lt;/li&gt;
-&lt;/ul&gt;&lt;/p&gt;
-&lt;p&gt;Example device(s):
-&lt;ul&gt;&lt;li&gt;CONN_02&lt;/li&gt;
-&lt;/ul&gt;&lt;/p&gt;</description>
-<wire x1="-0.635" y1="1.27" x2="0.635" y2="1.27" width="0.2032" layer="21"/>
-<wire x1="0.635" y1="1.27" x2="1.27" y2="0.635" width="0.2032" layer="21"/>
-<wire x1="1.27" y1="-0.635" x2="0.635" y2="-1.27" width="0.2032" layer="21"/>
-<wire x1="1.27" y1="0.635" x2="1.905" y2="1.27" width="0.2032" layer="21"/>
-<wire x1="1.905" y1="1.27" x2="3.175" y2="1.27" width="0.2032" layer="21"/>
-<wire x1="3.175" y1="1.27" x2="3.81" y2="0.635" width="0.2032" layer="21"/>
-<wire x1="3.81" y1="-0.635" x2="3.175" y2="-1.27" width="0.2032" layer="21"/>
-<wire x1="3.175" y1="-1.27" x2="1.905" y2="-1.27" width="0.2032" layer="21"/>
-<wire x1="1.905" y1="-1.27" x2="1.27" y2="-0.635" width="0.2032" layer="21"/>
-<wire x1="-1.27" y1="0.635" x2="-1.27" y2="-0.635" width="0.2032" layer="21"/>
-<wire x1="-0.635" y1="1.27" x2="-1.27" y2="0.635" width="0.2032" layer="21"/>
-<wire x1="-1.27" y1="-0.635" x2="-0.635" y2="-1.27" width="0.2032" layer="21"/>
-<wire x1="0.635" y1="-1.27" x2="-0.635" y2="-1.27" width="0.2032" layer="21"/>
-<wire x1="3.81" y1="0.635" x2="3.81" y2="-0.635" width="0.2032" layer="21"/>
-<rectangle x1="2.286" y1="-0.254" x2="2.794" y2="0.254" layer="51"/>
-<rectangle x1="-0.254" y1="-0.254" x2="0.254" y2="0.254" layer="51"/>
-<pad name="1" x="0" y="0" drill="1.016" diameter="1.8796" rot="R90"/>
-<pad name="2" x="2.54" y="0" drill="1.016" diameter="1.8796" rot="R90"/>
-<text x="-1.27" y="1.397" size="0.6096" layer="25" font="vector" ratio="20">&gt;NAME</text>
-<text x="-1.27" y="-2.032" size="0.6096" layer="27" font="vector" ratio="20">&gt;VALUE</text>
-</package>
-<package name="JST-2-SMD">
-<description>&lt;h3&gt;JST-Right Angle Male Header SMT&lt;/h3&gt;
-&lt;p&gt;Specifications:
-&lt;ul&gt;&lt;li&gt;Pin count: 2&lt;/li&gt;
-&lt;li&gt;Pin pitch: 2mm&lt;/li&gt;
-&lt;/ul&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=http://www.4uconnector.com/online/object/4udrawing/20404.pdf&gt;Datasheet referenced for footprint&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Example device(s):
-&lt;ul&gt;&lt;li&gt;CONN_02&lt;/li&gt;
-&lt;li&gt;JST_2MM_MALE&lt;/li&gt;
-&lt;/ul&gt;&lt;/p&gt;</description>
-<wire x1="-4" y1="-1" x2="-4" y2="-4.5" width="0.2032" layer="21"/>
-<wire x1="-4" y1="-4.5" x2="-3.2" y2="-4.5" width="0.2032" layer="21"/>
-<wire x1="-3.2" y1="-4.5" x2="-3.2" y2="-2" width="0.2032" layer="21"/>
-<wire x1="-3.2" y1="-2" x2="-2" y2="-2" width="0.2032" layer="21"/>
-<wire x1="2" y1="-2" x2="3.2" y2="-2" width="0.2032" layer="21"/>
-<wire x1="3.2" y1="-2" x2="3.2" y2="-4.5" width="0.2032" layer="21"/>
-<wire x1="3.2" y1="-4.5" x2="4" y2="-4.5" width="0.2032" layer="21"/>
-<wire x1="4" y1="-4.5" x2="4" y2="-1" width="0.2032" layer="21"/>
-<wire x1="2" y1="3" x2="-2" y2="3" width="0.2032" layer="21"/>
-<smd name="1" x="-1" y="-3.7" dx="1" dy="4.6" layer="1"/>
-<smd name="2" x="1" y="-3.7" dx="1" dy="4.6" layer="1"/>
-<smd name="NC1" x="-3.4" y="1.5" dx="3.4" dy="1.6" layer="1" rot="R90"/>
-<smd name="NC2" x="3.4" y="1.5" dx="3.4" dy="1.6" layer="1" rot="R90"/>
-<text x="-1.397" y="1.778" size="0.6096" layer="25" font="vector" ratio="20">&gt;NAME</text>
-<text x="-1.651" y="0.635" size="0.6096" layer="27" font="vector" ratio="20">&gt;VALUE</text>
-</package>
-<package name="JST-2-PTH">
-<description>&lt;h3&gt;JST 2 Pin Right Angle Plated Through  Hole&lt;/h3&gt;
-tDocu indicate polarity for connections that match SparkFun LiPo battery terminations. 
-&lt;p&gt;Specifications:
-&lt;ul&gt;&lt;li&gt;Pin count: 2&lt;/li&gt;
-&lt;li&gt;Pin pitch:2mm&lt;/li&gt;
-&lt;/ul&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=https://www.sparkfun.com/datasheets/Prototyping/Connectors/JST%282%29-01548.pdf&gt;Datasheet referenced for footprint&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Example device(s):
-&lt;ul&gt;&lt;li&gt;CONN_02&lt;/li&gt;
-&lt;/ul&gt;&lt;/p&gt;</description>
-<wire x1="-2.95" y1="-1.6" x2="-2.95" y2="6" width="0.2032" layer="21"/>
-<wire x1="-2.95" y1="6" x2="2.95" y2="6" width="0.2032" layer="21"/>
-<wire x1="2.95" y1="6" x2="2.95" y2="-1.6" width="0.2032" layer="21"/>
-<wire x1="-2.95" y1="-1.6" x2="-2.3" y2="-1.6" width="0.2032" layer="21"/>
-<wire x1="2.95" y1="-1.6" x2="2.3" y2="-1.6" width="0.2032" layer="21"/>
-<wire x1="-2.3" y1="-1.6" x2="-2.3" y2="0" width="0.2032" layer="21"/>
-<wire x1="2.3" y1="-1.6" x2="2.3" y2="0" width="0.2032" layer="21"/>
-<pad name="1" x="-1" y="0" drill="0.7" diameter="1.6"/>
-<pad name="2" x="1" y="0" drill="0.7" diameter="1.6"/>
-<text x="-1.27" y="5.27" size="0.6096" layer="25" font="vector" ratio="20">&gt;Name</text>
-<text x="-1.27" y="2.73" size="0.6096" layer="27" font="vector" ratio="20">&gt;Value</text>
-<text x="0.6" y="0.7" size="1.27" layer="51">+</text>
-<text x="-1.4" y="0.7" size="1.27" layer="51">-</text>
-</package>
 <package name="0603-CAP">
 <wire x1="-1.473" y1="0.983" x2="1.473" y2="0.983" width="0.0508" layer="39"/>
 <wire x1="1.473" y1="0.983" x2="1.473" y2="-0.983" width="0.0508" layer="39"/>
@@ -1266,19 +1184,6 @@ tDocu indicate polarity for connections that match SparkFun LiPo battery termina
 <text x="-12.7" y="10.414" size="1.778" layer="95" font="vector">&gt;NAME</text>
 <text x="-12.7" y="-7.874" size="1.778" layer="96" font="vector" align="top-left">&gt;VALUE</text>
 </symbol>
-<symbol name="CONN_02">
-<description>&lt;h3&gt;2 Pin Connection&lt;/h3&gt;</description>
-<wire x1="3.81" y1="-2.54" x2="-2.54" y2="-2.54" width="0.4064" layer="94"/>
-<wire x1="1.27" y1="2.54" x2="2.54" y2="2.54" width="0.6096" layer="94"/>
-<wire x1="1.27" y1="0" x2="2.54" y2="0" width="0.6096" layer="94"/>
-<wire x1="-2.54" y1="5.08" x2="-2.54" y2="-2.54" width="0.4064" layer="94"/>
-<wire x1="3.81" y1="-2.54" x2="3.81" y2="5.08" width="0.4064" layer="94"/>
-<wire x1="-2.54" y1="5.08" x2="3.81" y2="5.08" width="0.4064" layer="94"/>
-<pin name="1" x="7.62" y="0" visible="pad" length="middle" direction="pas" swaplevel="1" rot="R180"/>
-<pin name="2" x="7.62" y="2.54" visible="pad" length="middle" direction="pas" swaplevel="1" rot="R180"/>
-<text x="-2.54" y="-4.826" size="1.778" layer="96" font="vector">&gt;VALUE</text>
-<text x="-2.54" y="5.588" size="1.778" layer="95" font="vector">&gt;NAME</text>
-</symbol>
 <symbol name="RESISTOR">
 <wire x1="-2.54" y1="0" x2="-2.159" y2="1.016" width="0.1524" layer="94"/>
 <wire x1="-2.159" y1="1.016" x2="-1.524" y2="-1.016" width="0.1524" layer="94"/>
@@ -1540,49 +1445,6 @@ Adapted from SparkFun Libraries</description>
 <technology name="">
 <attribute name="DIGIKEY" value="1428-1019-1-ND "/>
 <attribute name="VALUE" value="9DoF IMU" constant="no"/>
-</technology>
-</technologies>
-</device>
-</devices>
-</deviceset>
-<deviceset name="CONNECTOR_2PIN" prefix="J" uservalue="yes">
-<description>&lt;b&gt; 2 pin connector &lt;/b&gt;
-&lt;br&gt;
-1X02 variant Can be used for soldering on wires or pins. &lt;br&gt;
-JST-PTH variant is a through hole battery connector for SparkFun batteries &lt;br&gt;
-JST-SMT variant is a surface mount battery connector for SparkFun batteries &lt;br&gt;</description>
-<gates>
-<gate name="G$1" symbol="CONN_02" x="-2.54" y="0"/>
-</gates>
-<devices>
-<device name="" package="1X02">
-<connects>
-<connect gate="G$1" pin="1" pad="1"/>
-<connect gate="G$1" pin="2" pad="2"/>
-</connects>
-<technologies>
-<technology name=""/>
-</technologies>
-</device>
-<device name="-JST-2MM-SMT" package="JST-2-SMD">
-<connects>
-<connect gate="G$1" pin="1" pad="2"/>
-<connect gate="G$1" pin="2" pad="1"/>
-</connects>
-<technologies>
-<technology name="">
-<attribute name="DIGIKEY" value="455-1749-1-ND"/>
-</technology>
-</technologies>
-</device>
-<device name="JST-PTH-2" package="JST-2-PTH">
-<connects>
-<connect gate="G$1" pin="1" pad="1"/>
-<connect gate="G$1" pin="2" pad="2"/>
-</connects>
-<technologies>
-<technology name="">
-<attribute name="DIGIKEY" value="455-1719-ND" constant="no"/>
 </technology>
 </technologies>
 </device>
@@ -2767,7 +2629,7 @@ part number 2062-2P from STA</description>
 <part name="U4" library="femtosat" deviceset="MPU9250" device="" value="9DoF IMU"/>
 <part name="P+6" library="femtosat" deviceset="3.3V" device=""/>
 <part name="GND6" library="femtosat" deviceset="GND" device=""/>
-<part name="J1" library="femtosat" deviceset="CONNECTOR_2PIN" device="-JST-2MM-SMT"/>
+<part name="J1" library="SparkFun-Connectors" deviceset="CONN_02" device=""/>
 <part name="GND7" library="femtosat" deviceset="GND" device=""/>
 <part name="C2" library="femtosat" deviceset="CAPACITOR_0.1UF" device="" value="0.1uF"/>
 <part name="R3" library="femtosat" deviceset="RESISTOR_10KOHM" device="0603" value="10K"/>
@@ -2781,9 +2643,6 @@ part number 2062-2P from STA</description>
 <part name="P+7" library="femtosat" deviceset="3.3V" device=""/>
 <part name="C4" library="femtosat" deviceset="CAPACITOR_0.1UF" device="" value="0.1uF"/>
 <part name="J2" library="femtosat" deviceset="CONNECTOR_6PIN" device="SILK_FEMALE_PTH"/>
-<part name="D2" library="femtosat" deviceset="LED_RED" device="0603" value="RED"/>
-<part name="R5" library="femtosat" deviceset="RESISTOR_330OHM" device="-0603-1/10W-1%" value="330"/>
-<part name="GND11" library="femtosat" deviceset="GND" device=""/>
 <part name="U2" library="microSD-Breakout-v14" deviceset="USD-SOCKET" device="SMD"/>
 <part name="J3" library="SparkFun-Connectors" deviceset="CONN_02" device=""/>
 <part name="R6" library="femtosat" deviceset="RESISTOR_1KOHM" device="-0603-1/10W-5%" value="1k"/>
@@ -2802,6 +2661,7 @@ part number 2062-2P from STA</description>
 <part name="GND13" library="femtosat" deviceset="GND" device=""/>
 <part name="P+10" library="femtosat" deviceset="3.3V" device=""/>
 <part name="J7" library="SparkFun-Connectors" deviceset="CONN_02" device=""/>
+<part name="J8" library="SparkFun-Connectors" deviceset="CONN_02" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -2839,9 +2699,6 @@ part number 2062-2P from STA</description>
 <instance part="P+7" gate="G$1" x="-121.92" y="190.5"/>
 <instance part="C4" gate="G$1" x="-132.08" y="175.26" rot="R90"/>
 <instance part="J2" gate="G$1" x="-251.46" y="114.3"/>
-<instance part="D2" gate="G$1" x="-205.74" y="170.18"/>
-<instance part="R5" gate="G$1" x="-205.74" y="177.8" rot="R90"/>
-<instance part="GND11" gate="1" x="-205.74" y="162.56"/>
 <instance part="U2" gate="G$1" x="-236.22" y="66.04"/>
 <instance part="J3" gate="G$1" x="-177.8" y="60.96"/>
 <instance part="R6" gate="G$1" x="-167.64" y="73.66" rot="R270"/>
@@ -2860,6 +2717,7 @@ part number 2062-2P from STA</description>
 <instance part="GND13" gate="1" x="-111.76" y="50.8"/>
 <instance part="P+10" gate="G$1" x="-111.76" y="83.82"/>
 <instance part="J7" gate="G$1" x="-243.84" y="170.18" rot="R90"/>
+<instance part="J8" gate="G$1" x="-264.16" y="198.12"/>
 </instances>
 <busses>
 </busses>
@@ -2909,9 +2767,14 @@ part number 2062-2P from STA</description>
 <pinref part="U3" gate="U1" pin="GND"/>
 <wire x1="-236.22" y1="172.72" x2="-231.14" y2="172.72" width="0.1524" layer="91"/>
 <pinref part="J1" gate="G$1" pin="2"/>
-<wire x1="-256.54" y1="185.42" x2="-236.22" y2="185.42" width="0.1524" layer="91"/>
+<wire x1="-256.54" y1="185.42" x2="-251.46" y2="185.42" width="0.1524" layer="91"/>
+<wire x1="-251.46" y1="185.42" x2="-236.22" y2="185.42" width="0.1524" layer="91"/>
 <wire x1="-236.22" y1="185.42" x2="-236.22" y2="172.72" width="0.1524" layer="91"/>
 <junction x="-236.22" y="172.72"/>
+<pinref part="J8" gate="G$1" pin="2"/>
+<wire x1="-256.54" y1="200.66" x2="-251.46" y2="200.66" width="0.1524" layer="91"/>
+<wire x1="-251.46" y1="200.66" x2="-251.46" y2="185.42" width="0.1524" layer="91"/>
+<junction x="-251.46" y="185.42"/>
 </segment>
 <segment>
 <pinref part="U4" gate="G$1" pin="AD0/SDO"/>
@@ -2936,10 +2799,6 @@ part number 2062-2P from STA</description>
 <pinref part="J2" gate="G$1" pin="5"/>
 <wire x1="-246.38" y1="119.38" x2="-238.76" y2="119.38" width="0.1524" layer="91"/>
 <label x="-243.84" y="119.38" size="1.778" layer="95"/>
-</segment>
-<segment>
-<pinref part="D2" gate="G$1" pin="C"/>
-<pinref part="GND11" gate="1" pin="GND"/>
 </segment>
 <segment>
 <pinref part="U2" gate="G$1" pin="GND"/>
@@ -2989,15 +2848,12 @@ part number 2062-2P from STA</description>
 <segment>
 <pinref part="U3" gate="U1" pin="OUT"/>
 <pinref part="C1" gate="G$1" pin="1"/>
-<wire x1="-213.36" y1="182.88" x2="-205.74" y2="182.88" width="0.1524" layer="91"/>
 <pinref part="P+2" gate="G$1" pin="3.3V"/>
-<wire x1="-205.74" y1="182.88" x2="-195.58" y2="182.88" width="0.1524" layer="91"/>
+<wire x1="-213.36" y1="182.88" x2="-195.58" y2="182.88" width="0.1524" layer="91"/>
 <wire x1="-195.58" y1="182.88" x2="-195.58" y2="187.96" width="0.1524" layer="91"/>
 <junction x="-195.58" y="182.88"/>
 <pinref part="C3" gate="G$1" pin="1"/>
 <wire x1="-195.58" y1="182.88" x2="-182.88" y2="182.88" width="0.1524" layer="91"/>
-<pinref part="R5" gate="G$1" pin="2"/>
-<junction x="-205.74" y="182.88"/>
 </segment>
 <segment>
 <pinref part="P+6" gate="G$1" pin="3.3V"/>
@@ -3228,12 +3084,6 @@ part number 2062-2P from STA</description>
 <label x="-119.38" y="175.26" size="1.778" layer="95"/>
 </segment>
 </net>
-<net name="N$10" class="0">
-<segment>
-<pinref part="D2" gate="G$1" pin="A"/>
-<pinref part="R5" gate="G$1" pin="1"/>
-</segment>
-</net>
 <net name="XTAL1" class="0">
 <segment>
 <pinref part="Y1" gate="G$1" pin="1"/>
@@ -3322,12 +3172,17 @@ part number 2062-2P from STA</description>
 <label x="-106.68" y="66.04" size="1.778" layer="95"/>
 </segment>
 </net>
-<net name="N$1" class="0">
+<net name="VIN" class="0">
 <segment>
 <pinref part="J1" gate="G$1" pin="1"/>
 <pinref part="J7" gate="G$1" pin="2"/>
-<wire x1="-256.54" y1="182.88" x2="-246.38" y2="182.88" width="0.1524" layer="91"/>
+<wire x1="-256.54" y1="182.88" x2="-254" y2="182.88" width="0.1524" layer="91"/>
+<wire x1="-254" y1="182.88" x2="-246.38" y2="182.88" width="0.1524" layer="91"/>
 <wire x1="-246.38" y1="182.88" x2="-246.38" y2="177.8" width="0.1524" layer="91"/>
+<pinref part="J8" gate="G$1" pin="1"/>
+<wire x1="-256.54" y1="198.12" x2="-254" y2="198.12" width="0.1524" layer="91"/>
+<wire x1="-254" y1="198.12" x2="-254" y2="182.88" width="0.1524" layer="91"/>
+<junction x="-254" y="182.88"/>
 </segment>
 </net>
 </nets>
