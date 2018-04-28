@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="9.0.0">
+<eagle version="8.3.2">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
@@ -164,6 +164,12 @@
 <text x="13.4874" y="25.9842" size="1.27" layer="21">1</text>
 <text x="10.9728" y="25.9842" size="1.27" layer="21">2</text>
 <text x="8.4074" y="25.9842" size="1.27" layer="21">3</text>
+<text x="0.9906" y="7.9248" size="1.016" layer="21">DTR</text>
+<text x="0.9144" y="20.6248" size="1.016" layer="21">GND</text>
+<text x="0.9652" y="18.161" size="1.016" layer="21">GND</text>
+<text x="0.8382" y="10.2108" size="1.016" layer="21">T</text>
+<text x="0.762" y="12.9286" size="1.016" layer="21">R</text>
+<text x="0.4572" y="15.5702" size="1.016" layer="21">3V</text>
 </plain>
 <libraries>
 <library name="femtosat">
@@ -1174,11 +1180,10 @@ Note, that not all DRC settings must be set by the manufacturer. Several can be 
 <param name="slThermalsForVias" value="0"/>
 <param name="dpMaxLengthDifference" value="10mm"/>
 <param name="dpGapFactor" value="2.5"/>
+<param name="checkGrid" value="0"/>
 <param name="checkAngle" value="0"/>
 <param name="checkFont" value="1"/>
 <param name="checkRestrict" value="1"/>
-<param name="checkStop" value="0"/>
-<param name="checkValues" value="0"/>
 <param name="useDiameter" value="13"/>
 <param name="maxErrors" value="50"/>
 </designrules>
@@ -1295,7 +1300,9 @@ Note, that not all DRC settings must be set by the manufacturer. Several can be 
 <attribute name="DIGIKEY" value="160-1181-1-ND" x="35.56" y="22.86" size="1.778" layer="27" display="off"/>
 </element>
 <element name="J1" library="SparkFun-Connectors" package="1X02" value="" x="8.255" y="8.3058"/>
-<element name="J2" library="femtosat" package="1X06" value="" x="5.207" y="14.7828" rot="R90"/>
+<element name="J2" library="femtosat" package="1X06" value="" x="5.207" y="14.7828" smashed="yes" rot="R90">
+<attribute name="VALUE" x="8.382" y="7.1628" size="1.27" layer="27" rot="R90"/>
+</element>
 <element name="J3" library="SparkFun-Connectors" package="1X02" value="" x="13.97" y="21.59" rot="R270"/>
 <element name="J4" library="SparkFun-Connectors" package="1X02" value="" x="11.43" y="21.59" rot="R270"/>
 <element name="J5" library="SparkFun-Connectors" package="1X02" value="" x="16.51" y="21.59" rot="R270"/>
