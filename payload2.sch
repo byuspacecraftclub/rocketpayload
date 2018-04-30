@@ -1008,6 +1008,46 @@ by exp-lbrs-replace2.ulp</description>
 <text x="-7.6962" y="1.8288" size="1.27" layer="25" ratio="10">&gt;NAME</text>
 <text x="-7.62" y="-3.175" size="1.27" layer="27">&gt;VALUE</text>
 </package>
+<package name="LGA-8-2.5X2.5">
+<description>&lt;h3&gt;LGA 8-Pin &amp;ndash;  2.5mm x 2.5mm, 0.65mm Pitch&lt;/h3&gt;
+&lt;p&gt;&lt;a href=https://cdn.sparkfun.com/assets/learn_tutorials/4/1/9/BST-BME280_DS001-10.pdf&gt;Example Datasheet&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Specifications:
+&lt;ul&gt;
+&lt;li&gt;Pin Count: 8&lt;/li&gt;
+&lt;li&gt;Dimensions: 2.5 x 2.5 mm&lt;/li&gt;
+&lt;li&gt;Pitch: 0.65 mm&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/p&gt;
+&lt;p&gt;Used by:
+&lt;ul&gt;&lt;li&gt;BME280&lt;/li&gt;&lt;/ul&gt;&lt;/p&gt;</description>
+<circle x="-1.61925" y="1.61925" radius="0.254" width="0" layer="21"/>
+<wire x1="-1.39065" y1="-1.44145" x2="-1.39065" y2="1.44145" width="0.127" layer="21"/>
+<wire x1="-1.39065" y1="1.44145" x2="1.39065" y2="1.44145" width="0.127" layer="21"/>
+<wire x1="1.39065" y1="1.44145" x2="1.39065" y2="-1.44145" width="0.127" layer="21"/>
+<wire x1="1.39065" y1="-1.44145" x2="-1.39065" y2="-1.44145" width="0.127" layer="21"/>
+<wire x1="1.25" y1="-1.25" x2="1.25" y2="1.25" width="0.001" layer="51"/>
+<wire x1="1.25" y1="1.25" x2="-1.25" y2="1.25" width="0.001" layer="51"/>
+<wire x1="-1.25" y1="1.25" x2="-1.25" y2="-1.25" width="0.001" layer="51"/>
+<wire x1="-1.25" y1="-1.25" x2="1.25" y2="-1.25" width="0.001" layer="51"/>
+<rectangle x1="-1.15" y1="0.8" x2="-0.8" y2="1.15" layer="51"/>
+<rectangle x1="-0.5" y1="0.8" x2="-0.15" y2="1.15" layer="51"/>
+<rectangle x1="0.15" y1="0.8" x2="0.5" y2="1.15" layer="51"/>
+<rectangle x1="0.8" y1="0.8" x2="1.15" y2="1.15" layer="51"/>
+<rectangle x1="-1.15" y1="-1.15" x2="-0.8" y2="-0.8" layer="51" rot="R180"/>
+<rectangle x1="-0.5" y1="-1.15" x2="-0.15" y2="-0.8" layer="51" rot="R180"/>
+<rectangle x1="0.15" y1="-1.15" x2="0.5" y2="-0.8" layer="51" rot="R180"/>
+<rectangle x1="0.8" y1="-1.15" x2="1.15" y2="-0.8" layer="51" rot="R180"/>
+<smd name="1" x="-0.975" y="1.025" dx="0.5" dy="0.35" layer="1" rot="R90"/>
+<smd name="2" x="-0.325" y="1.025" dx="0.5" dy="0.35" layer="1" rot="R90"/>
+<smd name="3" x="0.325" y="1.025" dx="0.5" dy="0.35" layer="1" rot="R90"/>
+<smd name="4" x="0.975" y="1.025" dx="0.5" dy="0.35" layer="1" rot="R90"/>
+<smd name="5" x="0.975" y="-1.025" dx="0.5" dy="0.35" layer="1" rot="R90"/>
+<smd name="6" x="0.325" y="-1.025" dx="0.5" dy="0.35" layer="1" rot="R90"/>
+<smd name="7" x="-0.325" y="-1.025" dx="0.5" dy="0.35" layer="1" rot="R90"/>
+<smd name="8" x="-0.975" y="-1.025" dx="0.5" dy="0.35" layer="1" rot="R90"/>
+<text x="-1.27" y="1.524" size="0.6096" layer="25" font="vector" ratio="20">&gt;NAME</text>
+<text x="-1.27" y="-1.524" size="0.6096" layer="27" font="vector" ratio="20" align="top-left">&gt;VALUE</text>
+</package>
 </packages>
 <symbols>
 <symbol name="FRAME_A_L">
@@ -1243,6 +1283,24 @@ by exp-lbrs-replace2.ulp</description>
 <pin name="6" x="5.08" y="7.62" visible="pad" length="middle" direction="pas" swaplevel="1" rot="R180"/>
 <text x="-5.08" y="-10.16" size="1.778" layer="96">&gt;VALUE</text>
 <text x="-5.08" y="10.922" size="1.778" layer="95">&gt;NAME</text>
+</symbol>
+<symbol name="BME280">
+<description>&lt;h3&gt;Bosch BME280 &amp;ndash; Combined Humidity and Pressure Sensor&lt;/h3&gt;
+&lt;p&gt;The  BME280 is as combined digital humidity, pressure and temperature sensor based on proven sensing principles. The sensor module is housed in an extremely compact metal-lid LGA package  with a footprint of only 2.5×2.5mm² with a height of 0.93mm. Its small dimensions and its low power consumption allow the implementation in battery driven devices such as handsets,  GPS modules or watches.&lt;/p&gt;
+&lt;p&gt;&lt;a href=https://cdn.sparkfun.com/assets/learn_tutorials/4/1/9/BST-BME280_DS001-10.pdf&gt;Datasheet&lt;/a&gt;&lt;/p&gt;</description>
+<wire x1="-10.16" y1="7.62" x2="12.7" y2="7.62" width="0.254" layer="94"/>
+<wire x1="12.7" y1="7.62" x2="12.7" y2="-10.16" width="0.254" layer="94"/>
+<wire x1="12.7" y1="-10.16" x2="-10.16" y2="-10.16" width="0.254" layer="94"/>
+<wire x1="-10.16" y1="-10.16" x2="-10.16" y2="7.62" width="0.254" layer="94"/>
+<pin name="!CS" x="15.24" y="5.08" length="short" rot="R180"/>
+<pin name="GND" x="-12.7" y="-7.62" length="short"/>
+<pin name="SCK/SCL" x="15.24" y="-2.54" length="short" rot="R180"/>
+<pin name="SDI/SDA" x="15.24" y="0" length="short" rot="R180"/>
+<pin name="SDO/ADR" x="15.24" y="-7.62" length="short" rot="R180"/>
+<pin name="VDD" x="-12.7" y="5.08" length="short"/>
+<pin name="VDDIO" x="-12.7" y="0" length="short"/>
+<text x="-10.16" y="7.874" size="1.778" layer="95">&gt;NAME</text>
+<text x="-10.16" y="-10.414" size="1.778" layer="95" align="top-left">&gt;VALUE</text>
 </symbol>
 </symbols>
 <devicesets>
@@ -1595,6 +1653,34 @@ This footprint was designed to help hold the alignment of a through-hole compone
 <technology name="">
 <attribute name="DIGIKEY" value="311-1.0KGRCT-ND "/>
 <attribute name="VALUE" value="1k"/>
+</technology>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="BME280" prefix="U" uservalue="yes">
+<description>&lt;h3&gt;Bosch BME280 &amp;ndash; Combined Humidity and Pressure Sensor&lt;/h3&gt;
+&lt;p&gt;The  BME280 is as combined digital humidity, pressure and temperature sensor based on proven sensing principles. The sensor module is housed in an extremely compact metal-lid LGA package  with a footprint of only 2.5×2.5mm² with a height of 0.93mm. Its small dimensions and its low power consumption allow the implementation in battery driven devices such as handsets,  GPS modules or watches.&lt;/p&gt;
+&lt;p&gt;&lt;a href=https://cdn.sparkfun.com/assets/learn_tutorials/4/1/9/BST-BME280_DS001-10.pdf&gt;Datasheet&lt;/a&gt;&lt;/p&gt;
+Adapted from the SparkFun Libraries</description>
+<gates>
+<gate name="U1" symbol="BME280" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="LGA-8-2.5X2.5">
+<connects>
+<connect gate="U1" pin="!CS" pad="2"/>
+<connect gate="U1" pin="GND" pad="1 7"/>
+<connect gate="U1" pin="SCK/SCL" pad="4"/>
+<connect gate="U1" pin="SDI/SDA" pad="3"/>
+<connect gate="U1" pin="SDO/ADR" pad="5"/>
+<connect gate="U1" pin="VDD" pad="8"/>
+<connect gate="U1" pin="VDDIO" pad="6"/>
+</connects>
+<technologies>
+<technology name="">
+<attribute name="DIGIKEY" value="828-1063-1-ND " constant="no"/>
+<attribute name="VALUE" value="BME280" constant="no"/>
 </technology>
 </technologies>
 </device>
@@ -2662,6 +2748,11 @@ part number 2062-2P from STA</description>
 <part name="P+10" library="femtosat" deviceset="3.3V" device=""/>
 <part name="J7" library="SparkFun-Connectors" deviceset="CONN_02" device=""/>
 <part name="J8" library="SparkFun-Connectors" deviceset="CONN_02" device=""/>
+<part name="U5" library="femtosat" deviceset="BME280" device="" value="BME280"/>
+<part name="P+11" library="femtosat" deviceset="3.3V" device=""/>
+<part name="GND11" library="femtosat" deviceset="GND" device=""/>
+<part name="P+12" library="femtosat" deviceset="3.3V" device=""/>
+<part name="GND14" library="femtosat" deviceset="GND" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -2718,6 +2809,11 @@ part number 2062-2P from STA</description>
 <instance part="P+10" gate="G$1" x="-111.76" y="83.82"/>
 <instance part="J7" gate="G$1" x="-243.84" y="170.18" rot="R90"/>
 <instance part="J8" gate="G$1" x="-264.16" y="198.12"/>
+<instance part="U5" gate="U1" x="-200.66" y="147.32"/>
+<instance part="P+11" gate="G$1" x="-226.06" y="157.48"/>
+<instance part="GND11" gate="1" x="-226.06" y="134.62"/>
+<instance part="P+12" gate="G$1" x="-175.26" y="157.48"/>
+<instance part="GND14" gate="1" x="-175.26" y="134.62"/>
 </instances>
 <busses>
 </busses>
@@ -2829,6 +2925,18 @@ part number 2062-2P from STA</description>
 <wire x1="-111.76" y1="60.96" x2="-111.76" y2="53.34" width="0.1524" layer="91"/>
 <pinref part="GND13" gate="1" pin="GND"/>
 </segment>
+<segment>
+<pinref part="U5" gate="U1" pin="GND"/>
+<wire x1="-213.36" y1="139.7" x2="-226.06" y2="139.7" width="0.1524" layer="91"/>
+<wire x1="-226.06" y1="139.7" x2="-226.06" y2="137.16" width="0.1524" layer="91"/>
+<pinref part="GND11" gate="1" pin="GND"/>
+</segment>
+<segment>
+<pinref part="U5" gate="U1" pin="SDO/ADR"/>
+<wire x1="-185.42" y1="139.7" x2="-175.26" y2="139.7" width="0.1524" layer="91"/>
+<wire x1="-175.26" y1="139.7" x2="-175.26" y2="137.16" width="0.1524" layer="91"/>
+<pinref part="GND14" gate="1" pin="GND"/>
+</segment>
 </net>
 <net name="3.3V" class="0">
 <segment>
@@ -2908,6 +3016,23 @@ part number 2062-2P from STA</description>
 <pinref part="P+10" gate="G$1" pin="3.3V"/>
 <wire x1="-111.76" y1="83.82" x2="-111.76" y2="78.74" width="0.1524" layer="91"/>
 </segment>
+<segment>
+<pinref part="U5" gate="U1" pin="VDD"/>
+<wire x1="-213.36" y1="152.4" x2="-218.44" y2="152.4" width="0.1524" layer="91"/>
+<pinref part="U5" gate="U1" pin="VDDIO"/>
+<wire x1="-218.44" y1="152.4" x2="-226.06" y2="152.4" width="0.1524" layer="91"/>
+<wire x1="-213.36" y1="147.32" x2="-218.44" y2="147.32" width="0.1524" layer="91"/>
+<wire x1="-218.44" y1="147.32" x2="-218.44" y2="152.4" width="0.1524" layer="91"/>
+<junction x="-218.44" y="152.4"/>
+<pinref part="P+11" gate="G$1" pin="3.3V"/>
+<wire x1="-226.06" y1="157.48" x2="-226.06" y2="152.4" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<pinref part="U5" gate="U1" pin="!CS"/>
+<wire x1="-185.42" y1="152.4" x2="-175.26" y2="152.4" width="0.1524" layer="91"/>
+<wire x1="-175.26" y1="152.4" x2="-175.26" y2="157.48" width="0.1524" layer="91"/>
+<pinref part="P+12" gate="G$1" pin="3.3V"/>
+</segment>
 </net>
 <net name="MISO" class="0">
 <segment>
@@ -2972,6 +3097,11 @@ part number 2062-2P from STA</description>
 <wire x1="-215.9" y1="22.86" x2="-205.74" y2="22.86" width="0.1524" layer="91"/>
 <label x="-213.36" y="22.86" size="1.778" layer="95"/>
 </segment>
+<segment>
+<pinref part="U5" gate="U1" pin="SDI/SDA"/>
+<wire x1="-185.42" y1="147.32" x2="-170.18" y2="147.32" width="0.1524" layer="91"/>
+<label x="-177.8" y="147.32" size="1.778" layer="95"/>
+</segment>
 </net>
 <net name="SCL" class="0">
 <segment>
@@ -2987,6 +3117,11 @@ part number 2062-2P from STA</description>
 <pinref part="U4" gate="G$1" pin="SCL/SCLK"/>
 <wire x1="-215.9" y1="25.4" x2="-205.74" y2="25.4" width="0.1524" layer="91"/>
 <label x="-213.36" y="25.4" size="1.778" layer="95"/>
+</segment>
+<segment>
+<pinref part="U5" gate="U1" pin="SCK/SCL"/>
+<wire x1="-185.42" y1="144.78" x2="-170.18" y2="144.78" width="0.1524" layer="91"/>
+<label x="-177.8" y="144.78" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="N$4" class="0">
