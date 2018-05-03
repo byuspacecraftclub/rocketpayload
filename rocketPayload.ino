@@ -29,7 +29,7 @@ void setup() {
 }
 
 void loop() {
-	uint_16 readings[NUM_SENSORS+1]; //One element for each temp sensor and one 
+	uint16_t readings[NUM_SENSORS+1]; //One element for each temp sensor and one 
 									//for time. We could add another for IMU 
 									//data if we wanted. 
 	readTemp(readings);
@@ -132,15 +132,104 @@ void setupSD()
 IMU that the rocket has launched*/
 void waitLaunch()
 {
+	//Putting the IMU into interrupt mode. 
+	/*uint8_t fromIMU = myIMU.readByte(MPU9250_ADDRESS, PWR_MGMT_1	);
+	uint8_t combo = 0x8f;
+	uint8_t intoIMU = fromIMU & combo;
+	myIMU.writeByte(MPU9250_ADDRESS, PWR_MGMT_1, intoIMU);
 	
+	fromIMU = myIMU.readByte(MPU9250_ADDRESS, PWR_MGMT_2);*/
+
+	uint8_t index[8];
+	index[0] = 4;
+	index[1] = 5;
+	index[2] = 6;
+	changeReg0(PWR_MGMT_1, index, 3);
+
+	index[0] = 3;
+	index[1] = 4;
+	index[2] = 5;
+	changeReg0(PWR_MGMT_2, index, 2);
+
+	index[0] = 0;
+	index[1] = 1;
+	index[2] = 2;
+	changeReg1(PWR_MGMT_2, index, 2);
+
+	index[0] = 3; //FIXME something was weird about the datasheet for this register. 
+	index[1] = 0; //It didn't agree with the instructions. I did my best to guess. 
+	changeReg1(ACCEL_CONFIG2, index, 2);
+	index[0] = 2;
+	index[1] = 1;
+	changeReg0(ACCEL_CONFIG2, index, 2);
+	
+	myIMU.writeByte(MPU9250_ADDRESS, INT_ENABLE, 0x40);
+	
+	index[0] = 6;
+	index[1] = 7;
+	changeReg1(MOT_DETECT_CTRL, index, 2);
+	
+	myIMU.writeByte(MPU9250_ADDRESS, WOM_THR, 0xff); // this is the wake on motion threshold. I set it as high as possible. Not sure if that is best or not. 
+	
+	myIMU.writeByte(MPU9250_ADDRESS, LP_ACCEL_ODR, 0x01);
+	//this is the frequency of wake up. The instructions didnt' give much guidance on how to set this properly.
+	
+	index[0] = 5;
+	changeReg1(PWR_MGMT_1, index, 1);
+	
+	//IMU setup for interrupt signal
+	
+	//put CPU to sleep 
+	
+	
+
+ 
 }
+
+//sets specific bits in registers to 0.
+void changeReg0(uint8_t regName, uint8_t index[], int size)
+{
+	uint8_t fromIMU = myIMU.readByte(MPU9250_ADDRESS, regName);
+	uint8_t combo = 0xff;
+	for(uint8_t i = 0; i < size; ++i)
+	{
+		uint8_t subNum = 0x01;
+		for(uint8_t j = 0; j < index[i]; ++j)
+		{
+			subNum == subNum << 1;
+		}
+		combo = combo - subNum;
+	}
+	uint8_t intoIMU = fromIMU & combo;
+	myIMU.writeByte(MPU9250_ADDRESS, regName, intoIMU);
+ //return true;
+}
+
+//sets specific bits in registers to 0.
+void changeReg1(uint8_t regName, uint8_t index[], uint8_t size)
+{
+	uint8_t fromIMU = myIMU.readByte(MPU9250_ADDRESS, regName);
+	uint8_t combo = 0;
+	for(uint8_t i = 0; i < size; ++i)
+	{
+		uint8_t addNum = 0x01;
+		for(uint8_t j = 0; j < index[i]; ++j)
+		{
+			addNum == addNum << 1;
+		}
+		combo = combo + addNum;
+	}
+	uint8_t intoIMU = fromIMU | combo;
+	myIMU.writeByte(MPU9250_ADDRESS, regName, intoIMU);
+}
+
 
 /*Saves the data stored in the array to the SD card*/
 //Currently set up to save the data in a csv file
 //dataLog must be open before this function is called. 
-void saveData(float reading[])
+void saveData(uint16_t reading[])
 {
-	for(int i = 0; i < NUM_SENSORS + 1; ++i)
+	for(uint8_t i = 0; i < NUM_SENSORS + 1; ++i)
 	{
 		if( i != NUM_SENSORS)
 		{
@@ -165,7 +254,7 @@ void setupTemp()
 }
 
 /*Gets the data from the temperature sensors and saves it in the array*/
-void readTemp(float readings[])
+void readTemp(uint16_t readings[])
 {
 	
 }
