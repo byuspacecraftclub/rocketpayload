@@ -11,13 +11,15 @@ Last Updated: May 15, 2018 by Wesley Stirk
 #include <SD.h>
 #include <avr/sleep.h>
 #include <stdint.h>
- 
+
 
 #define NUM_SENSORS  3
 
 #define SerialDebug true
 
 #define INTERRUPT_PIN 2 //This is the arduino pin that will have the interrupt from the IMU
+
+#define pinsize  4 //size of fixed array of analog pins
 
 #define MINUTES_TO_MEASURE 10
 #define SECS_IN_MIN 60
@@ -27,6 +29,8 @@ Last Updated: May 15, 2018 by Wesley Stirk
 MPU9250 myIMU;
 File dataLog;
 static int fileAttempt = 0;
+static uint8_t pins[pinsize] = {23,24,25,26}; //numbers of analog pins
+
 
 
 void setup() {
@@ -49,7 +53,7 @@ void loop() {
   setupSD();
   while ((currentTime - startTime) < TOTAL_MILLIS) //keep reading temperature sensors and recording them until the time is over. 
   {
-    uint16_t readings[NUM_SENSORS+1]; //One element for each temp sensor and one 
+    uint8_t readings[NUM_SENSORS+1]; //One element for each temp sensor and one 
                     //for time. We could add another for IMU 
                     //data if we wanted. 
     readTemp(readings);
@@ -259,7 +263,7 @@ void changeReg1(uint8_t regName, uint8_t index[], uint8_t indSize)
 /*Saves the data stored in the array to the SD card*/
 //Currently set up to save the data in a csv file
 //dataLog must be open before this function is called. 
-void saveData(uint16_t reading[])
+void saveData(uint8_t reading[])
 {
   for(uint8_t i = 0; i < NUM_SENSORS + 1; ++i)
   {
@@ -282,11 +286,20 @@ void saveData(uint16_t reading[])
 /*Sets up everything needed for the temperature sensors when first powered on*/
 void setupTemp()
 {
-  
+    analogReference(INTERNAL); //set the max voltage to a lower value for more accuracy
 }
 
 /*Gets the data from the temperature sensors and saves it in the array*/
-void readTemp(uint16_t readings[])
+void readTemp(uint8_t readings[])
 {
-  
+  for(uint8_t i; i < NUM_SENSORS; i++) //iterates through each of the sensors
+  {
+    readings[i] = analogRead(pins[i]); //reads from the analog pin and places in the proper place
+    
+    if(SerialDebugging)
+    {
+      Serial.print("analog voltage value: "); //outputs read value
+      Serial.println(readings[i]);
+    }
+  }
 }
