@@ -1,10 +1,8 @@
 /*
 Payload Lauch Project Code
 Spacecraft Club
-Last Updated: May 15, 2018 by Wesley Stirk
+Last Updated: June 11, 2018 by Wesley Stirk
 */
-
-#include "quaternionFilters.h"
 #include "MPU9250.h"
 
 #include <SPI.h>
@@ -19,26 +17,27 @@ Last Updated: May 15, 2018 by Wesley Stirk
 
 #define INTERRUPT_PIN 2 //This is the arduino pin that will have the interrupt from the IMU
 
-#define pinsize  4 //size of fixed array of analog pins
-
-#define MINUTES_TO_MEASURE 10
-#define SECS_IN_MIN 60
-#define MILLIS_IN_SEC 1000
+#define MINUTES_TO_MEASURE .25
+#define SECS_IN_MIN 60L
+#define MILLIS_IN_SEC 1000L
 #define TOTAL_MILLIS MINUTES_TO_MEASURE * SECS_IN_MIN * MILLIS_IN_SEC
+#define CHAR_TO_CHANGE 11
+#define FILE_NAME "d.csv"
 
-MPU9250 myIMU;
+
 File dataLog;
-static int fileAttempt = 0;
-static uint8_t pins[pinsize] = {23,24,25,26}; //numbers of analog pins
+//static uint8_t fileAttempt = 6;
+//String fileName = "systemTest00.csv";
 
 
 
 void setup() {
   //Initialize Pins
   Serial.begin(9600);
-  
+  Serial.print(F("sizeof file: "));
+  Serial.println(sizeof(File));
   pinMode(INTERRUPT_PIN, INPUT);
-  fileAttempt = 0;
+  //fileAttempt = 1;
   setupIMU();
   setupSD();
   setupTemp();
@@ -48,19 +47,27 @@ void setup() {
 
 void loop() {
   waitLaunch(); //It will wait here every time until another interrupt is received. 
-  unsigned long startTime = millis();
-  unsigned long currentTime = millis();
-  setupSD();
+  //setupSD();
+  dataLog = SD.open(F(FILE_NAME), FILE_WRITE);
+  uint32_t startTime = millis();
+  uint32_t currentTime = millis();
+ 
   while ((currentTime - startTime) < TOTAL_MILLIS) //keep reading temperature sensors and recording them until the time is over. 
   {
-    uint8_t readings[NUM_SENSORS+1]; //One element for each temp sensor and one 
+    if(SerialDebug)
+    {
+      Serial.println(F("in the loop"));
+    }
+    uint16_t readings[NUM_SENSORS+1]; //One element for each temp sensor and one 
                     //for time. We could add another for IMU 
                     //data if we wanted. 
     readTemp(readings);
     saveData(readings);
     currentTime = millis();
-    //Should we add a delay here?
+    delay(250);//Should we add a delay here?
   }
+  //dataLog.close();
+  dataLog.println(F("next line"));
   dataLog.close();
 }
 
@@ -76,8 +83,9 @@ void isr()
 /*Sets up everything needed for the IMU*/
 void setupIMU()
 {
+  MPU9250 myIMU;
   // Read the WHO_AM_I register, this is a good test of communication
-  byte c = myIMU.readByte(MPU9250_ADDRESS, WHO_AM_I_MPU9250);
+  /*byte c = myIMU.readByte(MPU9250_ADDRESS, WHO_AM_I_MPU9250);
   if(SerialDebug)
   {
     Serial.print("MPU9250 "); Serial.print("I AM "); Serial.print(c, HEX);
@@ -87,7 +95,7 @@ void setupIMU()
   if (c == 0x71) // WHO_AM_I should always be 0x68
   {
     
-    myIMU.MPU9250SelfTest(myIMU.selfTest);
+    //myIMU.MPU9250SelfTest(myIMU.selfTest);
     if(SerialDebug)
     {
     Serial.println("MPU9250 is online...");
@@ -127,12 +135,16 @@ void setupIMU()
     Serial.print("Could not connect to MPU9250: 0x");
     Serial.println(c, HEX);
     while(1) ; // Loop forever if communication doesn't happen
+  }*/
+  if(SerialDebug)
+  {
+    Serial.println(F("Starting register read/write"));
   }
-
-
   //Now to put the IMU into wake-on-motion interrupt mode. 
-  //Putting the IMU into interrupt mode. 
+  //Putting the IMU into interrupt mode.
+  Serial.println(FreeRam()); 
   uint8_t index[8];
+  Serial.println(FreeRam());
   index[0] = 4;
   index[1] = 5;
   index[2] = 6;
@@ -165,10 +177,10 @@ void setupIMU()
   myIMU.writeByte(MPU9250_ADDRESS, WOM_THR, 0xff); // this is the wake on motion threshold. I set it as high as possible. Not sure if that is best or not. 
 
 
-  index[0] = 3;
-  index[1] = 1;
-  index[2] = 0;
-  changeReg1(LP_ACCEL_ODR, index, 3); //this is the frequency of wake up. The instructions didnt' give much guidance on how to set this properly.
+  index[0] = 1;
+  index[1] = 0;
+  //index[2] = 3;
+  changeReg1(LP_ACCEL_ODR, index, 2); //this is the frequency of wake up. The instructions didnt' give much guidance on how to set this properly.
 
   index[0] = 5;
   changeReg0(INT_PIN_CFG, index, 1); //This insures that interrupt only last for 50us.
@@ -181,54 +193,82 @@ void setupIMU()
 /*Sets up everything needed for the SD memory*/
 bool setupSD()
 {
+  if(SerialDebug)
+  {
+    Serial.println(F("Now setting up the SD card...."));
+  }
+  pinMode(10,OUTPUT);
+  Serial.println(FreeRam());
   if(SD.begin()) //This will default to the hardware SS pin 
           //unless we want to specify another pin. 
   {
     if(SerialDebug)
     {
-      Serial.println("SD card initialized");
+      Serial.println(F("SD card initialized"));
     }
   }
   else
   {
     if(SerialDebug)
     {
-      Serial.println("SD card failed to initialize");
+      Serial.println(F("SD card failed to initialize"));
     }
-   return false;
+   //return false;
   }
-  //String fileName = "datalog" + fileAttempt + ".csv";
-  //dataLog = SD.open(fileName);
-  dataLog.print("time,");
-  int i = 0;
+
+  //fileName[CHAR_TO_CHANGE] = fileAttempt;
+  //fileAttempt++;
+  Serial.println(FreeRam());
+  dataLog = SD.open(F(FILE_NAME), FILE_WRITE);
+  Serial.println(FreeRam());
+  if(!dataLog)
+  {
+    if(SerialDebug)
+    {
+      Serial.println(F("error opening the file! It didn't work!!"));
+    }
+    return false;
+  }
+  else
+  {
+    if(SerialDebug)
+    {
+      Serial.println(F("It worked!!"));
+    }
+  }
+  
+  dataLog.print(F("time,"));
+  uint8_t i = 0;
   for(i = 1; i < NUM_SENSORS; ++i)
   {
-    dataLog.print("temp ");
+    dataLog.print(F("temp "));
     dataLog.print(i);
     dataLog.print(",");
   }
-  dataLog.print("temp "); //outside of the loop to be the 
+  dataLog.print(F("temp ")); //outside of the loop to be the 
               //last column
   dataLog.println(i);
- return true;
+  return true;
 }
 
 /*Puts the board in low power mode and waits for a signal from the 
 IMU that the rocket has launched*/
 void waitLaunch()
 {
+  //MPU9250 myIMU;
   attachInterrupt(digitalPinToInterrupt(INTERRUPT_PIN), isr, RISING);
   set_sleep_mode(SLEEP_MODE_PWR_DOWN);
   sleep_enable();
   if(SerialDebug)
   {
-    Serial.println("Entering Sleep mode....");
+    Serial.println(F("Entering Sleep mode...."));
   }
+  Serial.flush();
   sleep_mode(); //It waits here until it receives an interrupt signal. Then it will move on. 
   sleep_disable();
   if(SerialDebug)
   {
-      Serial.println("Arduino has woken up now.");
+      Serial.println(F("Arduino has woken up now."));
   }
   detachInterrupt(INTERRUPT_PIN);
  
@@ -237,6 +277,7 @@ void waitLaunch()
 //sets specific bits in registers to 0.
 void changeReg0(uint8_t regName, uint8_t index[], uint8_t indSize)
 {
+  MPU9250 myIMU;
   uint8_t reg = myIMU.readByte(MPU9250_ADDRESS, regName);
   for(uint8_t i = 0; i < indSize; ++i)
   {
@@ -250,6 +291,7 @@ void changeReg0(uint8_t regName, uint8_t index[], uint8_t indSize)
 //sets specific bits in registers to 0.
 void changeReg1(uint8_t regName, uint8_t index[], uint8_t indSize)
 {
+  MPU9250 myIMU;
   uint8_t reg = myIMU.readByte(MPU9250_ADDRESS, regName);
   for(uint8_t i = 0; i < indSize; ++i)
   {
@@ -263,14 +305,14 @@ void changeReg1(uint8_t regName, uint8_t index[], uint8_t indSize)
 /*Saves the data stored in the array to the SD card*/
 //Currently set up to save the data in a csv file
 //dataLog must be open before this function is called. 
-void saveData(uint8_t reading[])
+void saveData(uint16_t reading[])
 {
   for(uint8_t i = 0; i < NUM_SENSORS + 1; ++i)
   {
     if( i != NUM_SENSORS)
     {
       dataLog.print(reading[i]);
-      dataLog.print(",");
+      dataLog.print(F(","));
     }
     else
     {
@@ -286,20 +328,15 @@ void saveData(uint8_t reading[])
 /*Sets up everything needed for the temperature sensors when first powered on*/
 void setupTemp()
 {
-    analogReference(INTERNAL); //set the max voltage to a lower value for more accuracy
+  
 }
 
 /*Gets the data from the temperature sensors and saves it in the array*/
-void readTemp(uint8_t readings[])
+void readTemp(uint16_t readings[])
 {
-  for(uint8_t i; i < NUM_SENSORS; i++) //iterates through each of the sensors
-  {
-    readings[i] = analogRead(pins[i]); //reads from the analog pin and places in the proper place
-    
-    if(SerialDebugging)
-    {
-      Serial.print("analog voltage value: "); //outputs read value
-      Serial.println(readings[i]);
-    }
-  }
+  //randomSeed(millis());
+  readings[0] = millis();
+  readings[1] = 1;
+  readings[2] = 2;
+  readings[3] = 3;
 }
