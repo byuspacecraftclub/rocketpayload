@@ -1,7 +1,7 @@
 /*
 Payload Lauch Project Code
 Spacecraft Club
-Last Updated: June 11, 2018 by Wesley Stirk
+Last Updated: May 15, 2018 by Wesley Stirk
 */
 #include "MPU9250.h"
 
@@ -11,35 +11,46 @@ Last Updated: June 11, 2018 by Wesley Stirk
 #include <stdint.h>
 
 
-#define NUM_SENSORS  3
+#define NUM_SENSORS  2
 
-#define SerialDebug true
+//#define SerialDebug 
 
 #define INTERRUPT_PIN 2 //This is the arduino pin that will have the interrupt from the IMU
+#define LED_PIN 5
+#define TEMP1_PIN 0 //FIXME
+#define TEMP2_PIN 0
 
 #define MINUTES_TO_MEASURE .25
 #define SECS_IN_MIN 60L
 #define MILLIS_IN_SEC 1000L
 #define TOTAL_MILLIS MINUTES_TO_MEASURE * SECS_IN_MIN * MILLIS_IN_SEC
-#define CHAR_TO_CHANGE 11
-#define FILE_NAME "d.csv"
+#define FILE_NAME "e.csv"
 
 
 File dataLog;
-//static uint8_t fileAttempt = 6;
-//String fileName = "systemTest00.csv";
-
-
 
 void setup() {
   //Initialize Pins
+#ifdef SerialDebug
   Serial.begin(9600);
-  Serial.print(F("sizeof file: "));
-  Serial.println(sizeof(File));
+#endif
+  
+  
   pinMode(INTERRUPT_PIN, INPUT);
-  //fileAttempt = 1;
+  pinMode(TEMP1_PIN, INPUT);
+  pinMode(TEMP2_PIN, INPUT);
+  pinMode(LED_PIN, OUTPUT);
+  
+  TurnedOn(); //let the world now that it is on and functioning. 
+  
   setupIMU();
-  setupSD();
+  if(!setupSD()) //if the SD card doesn't work or the file doesn't open, there is a critical error and the program won't work. 
+  {
+    while(1)
+    {
+        ErrorMessage();
+    }
+  }
   setupTemp();
   
 
@@ -49,25 +60,29 @@ void loop() {
   waitLaunch(); //It will wait here every time until another interrupt is received. 
   //setupSD();
   dataLog = SD.open(F(FILE_NAME), FILE_WRITE);
+  while(!dataLog) //if the dataLog doesn't open it's a critical error so keep trying to open until it works. 
+  {
+    ErrorMessage();
+    dataLog = SD.open(F(FILE_NAME), FILE_WRITE); 
+  }
   uint32_t startTime = millis();
   uint32_t currentTime = millis();
  
   while ((currentTime - startTime) < TOTAL_MILLIS) //keep reading temperature sensors and recording them until the time is over. 
   {
-    if(SerialDebug)
-    {
+#ifdef SerialDebug
       Serial.println(F("in the loop"));
-    }
+#endif
     uint16_t readings[NUM_SENSORS+1]; //One element for each temp sensor and one 
                     //for time. We could add another for IMU 
                     //data if we wanted. 
     readTemp(readings);
     saveData(readings);
     currentTime = millis();
-    delay(250);//Should we add a delay here?
+    delay(250);//How long should the sample rate be?
   }
-  //dataLog.close();
-  dataLog.println(F("next line"));
+  
+  dataLog.println(F("next sample"));
   dataLog.close();
 }
 
@@ -79,78 +94,67 @@ void isr()
   
 }
 
+/*
+ * Delivers a LED message saying that it is turned on.
+ */
+void TurnedOn()
+{
+  for(int i = 0; i < 12; ++i)
+  {
+    digitalWrite(LED_PIN, HIGH);
+    delay(50);
+    digitalWrite(LED_PIN, LOW);
+    delay(50);
+  }
+}
+
+/*
+ * Delivers an LED message that there was an error somewhere in the program. 
+ */
+void ErrorMessage()
+{
+  for(int i = 0; i < 3; ++i)
+  {
+    digitalWrite(LED_PIN, HIGH);
+    delay(150);
+    digitalWrite(LED_PIN, LOW);
+    delay(50);
+  }
+
+  delay(250);
+}
+
+/*
+ * Delivers and LED message that another valid check was achieved. 
+ */
+void GoodNews()
+{
+  for(int i = 0; i < 2; ++i)
+  {
+    digitalWrite(LED_PIN, HIGH);
+    delay(200);
+    digitalWrite(LED_PIN, LOW);
+    delay(50);
+  }
+}
+ 
 
 /*Sets up everything needed for the IMU*/
 void setupIMU()
 {
   MPU9250 myIMU;
-  // Read the WHO_AM_I register, this is a good test of communication
-  /*byte c = myIMU.readByte(MPU9250_ADDRESS, WHO_AM_I_MPU9250);
-  if(SerialDebug)
-  {
-    Serial.print("MPU9250 "); Serial.print("I AM "); Serial.print(c, HEX);
-    Serial.print(" I should be "); Serial.println(0x71, HEX);
-  }
-
-  if (c == 0x71) // WHO_AM_I should always be 0x68
-  {
-    
-    //myIMU.MPU9250SelfTest(myIMU.selfTest);
-    if(SerialDebug)
-    {
-    Serial.println("MPU9250 is online...");
-
-    // Start by performing self test and reporting values
-      
-      Serial.print("x-axis self test: acceleration trim within : ");
-      Serial.print(myIMU.selfTest[0],1); Serial.println("% of factory value");
-      Serial.print("y-axis self test: acceleration trim within : ");
-      Serial.print(myIMU.selfTest[1],1); Serial.println("% of factory value");
-      Serial.print("z-axis self test: acceleration trim within : ");
-      Serial.print(myIMU.selfTest[2],1); Serial.println("% of factory value");
-      Serial.print("x-axis self test: gyration trim within : ");
-      Serial.print(myIMU.selfTest[3],1); Serial.println("% of factory value");
-      Serial.print("y-axis self test: gyration trim within : ");
-      Serial.print(myIMU.selfTest[4],1); Serial.println("% of factory value");
-      Serial.print("z-axis self test: gyration trim within : ");
-      Serial.print(myIMU.selfTest[5],1); Serial.println("% of factory value");
-    }
-
-    // Calibrate gyro and accelerometers, load biases in bias registers
-    myIMU.calibrateMPU9250(myIMU.gyroBias, myIMU.accelBias);
-
-    
-     myIMU.initMPU9250();
-    // Initialize device for active mode read of acclerometer, gyroscope, and
-    // temperature
-    if(SerialDebug)
-    {
-      Serial.println("MPU9250 initialized for active data mode....");
-    }
-
-    
-  } // if (c == 0x71)
-  else
-  {
-    Serial.print("Could not connect to MPU9250: 0x");
-    Serial.println(c, HEX);
-    while(1) ; // Loop forever if communication doesn't happen
-  }*/
-  if(SerialDebug)
-  {
-    Serial.println(F("Starting register read/write"));
-  }
+  
+#ifdef SerialDebug
+  Serial.println(F("Starting register read/write"));
+#endif
   //Now to put the IMU into wake-on-motion interrupt mode. 
   //Putting the IMU into interrupt mode.
-  Serial.println(FreeRam()); 
   uint8_t index[8];
-  Serial.println(FreeRam());
   index[0] = 4;
   index[1] = 5;
   index[2] = 6;
   changeReg0(PWR_MGMT_1, index, 3);
   
-
   index[0] = 3;
   index[1] = 4;
   index[2] = 5;
@@ -193,48 +197,41 @@ void setupIMU()
 /*Sets up everything needed for the SD memory*/
 bool setupSD()
 {
-  if(SerialDebug)
-  {
-    Serial.println(F("Now setting up the SD card...."));
-  }
-  pinMode(10,OUTPUT);
-  Serial.println(FreeRam());
+#ifdef SerialDebug
+  Serial.println(F("Now setting up the SD card...."));
+#endif
+  pinMode(10,OUTPUT); //needed to make the software happy. 
   if(SD.begin()) //This will default to the hardware SS pin 
           //unless we want to specify another pin. 
   {
-    if(SerialDebug)
-    {
+#ifdef SerialDebug
       Serial.println(F("SD card initialized"));
-    }
+#endif
+    GoodNews();
   }
   else
   {
-    if(SerialDebug)
-    {
+#ifdef SerialDebug
       Serial.println(F("SD card failed to initialize"));
-    }
-   //return false;
+#endif
+      ErrorMessage();
+      return false;
   }
 
-  //fileName[CHAR_TO_CHANGE] = fileAttempt;
-  //fileAttempt++;
-  Serial.println(FreeRam());
   dataLog = SD.open(F(FILE_NAME), FILE_WRITE);
-  Serial.println(FreeRam());
   if(!dataLog)
   {
-    if(SerialDebug)
-    {
+#ifdef SerialDebug
       Serial.println(F("error opening the file! It didn't work!!"));
-    }
+#endif
+    ErrorMessage();
     return false;
   }
   else
   {
-    if(SerialDebug)
-    {
-      Serial.println(F("It worked!!"));
-    }
+#ifdef SerialDebug
+      Serial.println(F("File Opened Successfully"));
+#endif
   }
   
   dataLog.print(F("time,"));
@@ -248,6 +245,8 @@ bool setupSD()
   dataLog.print(F("temp ")); //outside of the loop to be the 
               //last column
   dataLog.println(i);
+  dataLog.close(); //it will be opened again in the loop so we need to close it here. 
+  GoodNews();
   return true;
 }
 
@@ -255,21 +254,18 @@ bool setupSD()
 IMU that the rocket has launched*/
 void waitLaunch()
 {
-  //MPU9250 myIMU;
   attachInterrupt(digitalPinToInterrupt(INTERRUPT_PIN), isr, RISING);
   set_sleep_mode(SLEEP_MODE_PWR_DOWN);
   sleep_enable();
-  if(SerialDebug)
-  {
+#ifdef SerialDebug
     Serial.println(F("Entering Sleep mode...."));
-  }
-  Serial.flush();
+    Serial.flush();
+#endif
   sleep_mode(); //It waits here until it receives an interrupt signal. Then it will move on. 
   sleep_disable();
-  if(SerialDebug)
-  {
+#ifdef SerialDebug
       Serial.println(F("Arduino has woken up now."));
-  }
+#endif
   detachInterrupt(INTERRUPT_PIN);
  
 }
@@ -328,7 +324,17 @@ void saveData(uint16_t reading[])
 /*Sets up everything needed for the temperature sensors when first powered on*/
 void setupTemp()
 {
-  
+    if(analogRead(TEMP1_PIN) == 0 || analogRead(TEMP2_PIN) == 0) //error
+    {
+        if(analogRead(TEMP1_PIN) == 0 && analogRead(TEMP2_PIN) == 0) //critical error
+        {
+            while(1) //stop the program.
+            {
+              ErrorMessage(); 
+            }
+        }
+    }
+    
 }
 
 /*Gets the data from the temperature sensors and saves it in the array*/
@@ -336,7 +342,6 @@ void readTemp(uint16_t readings[])
 {
   //randomSeed(millis());
   readings[0] = millis();
-  readings[1] = 1;
-  readings[2] = 2;
-  readings[3] = 3;
+  readings[1] = analogRead(TEMP1_PIN);
+  readings[2] = analogRead(TEMP2_PIN);
 }
