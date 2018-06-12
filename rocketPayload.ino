@@ -1,7 +1,7 @@
 /*
 Payload Lauch Project Code
 Spacecraft Club
-Last Updated: May 15, 2018 by Wesley Stirk
+Last Updated: June 11, 2018 by Wesley Stirk
 */
 #include "MPU9250.h"
 
