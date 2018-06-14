@@ -13,18 +13,18 @@ Last Updated: June 11, 2018 by Wesley Stirk
 
 #define NUM_SENSORS  2
 
-//#define SerialDebug 
+#define SerialDebug 
 
 #define INTERRUPT_PIN 2 //This is the arduino pin that will have the interrupt from the IMU
 #define LED_PIN 5
-#define TEMP1_PIN 0 //FIXME
-#define TEMP2_PIN 0
+#define TEMP1_PIN 0 
+#define TEMP2_PIN 1
 
-#define MINUTES_TO_MEASURE .25
+#define MINUTES_TO_MEASURE 1
 #define SECS_IN_MIN 60L
 #define MILLIS_IN_SEC 1000L
 #define TOTAL_MILLIS MINUTES_TO_MEASURE * SECS_IN_MIN * MILLIS_IN_SEC
-#define FILE_NAME "e.csv"
+#define FILE_NAME "temp0.csv"
 
 
 File dataLog;
@@ -324,6 +324,7 @@ void saveData(uint16_t reading[])
 /*Sets up everything needed for the temperature sensors when first powered on*/
 void setupTemp()
 {
+    analogReference(INTERNAL); //set the max voltage to a lower value for more accuracy
     if(analogRead(TEMP1_PIN) == 0 || analogRead(TEMP2_PIN) == 0) //error
     {
         if(analogRead(TEMP1_PIN) == 0 && analogRead(TEMP2_PIN) == 0) //critical error
