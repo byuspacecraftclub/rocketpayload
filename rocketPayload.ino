@@ -20,11 +20,11 @@ Last Updated: June 11, 2018 by Wesley Stirk
 #define TEMP1_PIN 0 
 #define TEMP2_PIN 1
 
-#define MINUTES_TO_MEASURE 1
+#define MINUTES_TO_MEASURE 10L
 #define SECS_IN_MIN 60L
 #define MILLIS_IN_SEC 1000L
 #define TOTAL_MILLIS MINUTES_TO_MEASURE * SECS_IN_MIN * MILLIS_IN_SEC
-#define FILE_NAME "temp0.csv"
+#define FILE_NAME "rocketLaunch.csv"
 
 
 File dataLog;
@@ -182,7 +182,7 @@ void setupIMU()
 
 
   index[0] = 1;
-  index[1] = 0;
+  index[1] = 2;
   //index[2] = 3;
   changeReg1(LP_ACCEL_ODR, index, 2); //this is the frequency of wake up. The instructions didnt' give much guidance on how to set this properly.
 
